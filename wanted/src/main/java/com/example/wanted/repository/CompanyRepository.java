@@ -1,6 +1,6 @@
 package com.example.wanted.repository;
 
-import static com.example.wanted.common.exception.exceptionType.CompanyException.*;
+import static com.example.wanted.common.exception.exceptionType.CompanyExceptionType.*;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
