@@ -1,6 +1,6 @@
 package com.example.wanted.common.exception;
 
-import static com.example.wanted.common.exception.CommonExceptionType.*;
+import static com.example.wanted.common.exception.exceptionType.CommonExceptionType.*;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
