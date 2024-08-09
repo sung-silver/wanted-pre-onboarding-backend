@@ -1,5 +1,7 @@
 package com.example.wanted.common.exception;
 
+import com.example.wanted.common.exception.exceptionType.ExceptionType;
+
 import lombok.Getter;
 
 @Getter
