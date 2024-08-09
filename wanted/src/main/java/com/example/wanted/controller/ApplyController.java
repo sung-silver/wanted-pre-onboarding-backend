@@ -3,6 +3,7 @@ package com.example.wanted.controller;
 import java.net.URI;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 public class ApplyController {
 	private final ApplyService applyService;
 
+	@PostMapping
 	public ResponseEntity<Void> createApply(@RequestBody @Valid final CreateApplyRequestDTO request) {
 		ApplyIdVO applyIdVO = applyService.createApply(request);
 		URI location = ServletUriComponentsBuilder
