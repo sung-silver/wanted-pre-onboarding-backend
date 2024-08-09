@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.wanted.common.vo.RecruitDetailVO;
 import com.example.wanted.common.vo.RecruitIdVO;
 import com.example.wanted.common.vo.RecruitVO;
 import com.example.wanted.controller.dto.request.CreateRecruitRequestDTO;
@@ -59,5 +60,9 @@ public class RecruitService {
 			.stream()
 			.map(RecruitVO::from)
 			.toList();
+	}
+
+	public RecruitDetailVO getRecruitDetail(final long recruitId) {
+		return RecruitDetailVO.from(recruitRepository.findByIdOrThrow(recruitId));
 	}
 }
