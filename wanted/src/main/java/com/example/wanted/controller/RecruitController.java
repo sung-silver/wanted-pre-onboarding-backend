@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.wanted.common.vo.RecruitDetailVO;
 import com.example.wanted.common.vo.RecruitIdVO;
 import com.example.wanted.common.vo.RecruitVO;
 import com.example.wanted.controller.dto.request.CreateRecruitRequestDTO;
 import com.example.wanted.controller.dto.request.UpdateRecruitRequestDTO;
+import com.example.wanted.controller.dto.response.RecruitDetailResponseDTO;
 import com.example.wanted.controller.dto.response.RecruitResponseDTO;
 import com.example.wanted.service.RecruitService;
 
@@ -77,5 +79,12 @@ public class RecruitController {
 			.map(RecruitResponseDTO::from)
 			.toList();
 		return ResponseEntity.ok(recruitResponseDTOs);
+	}
+
+	@GetMapping("/{recruitId}")
+	public ResponseEntity<RecruitDetailResponseDTO> getRecruitDetail(@PathVariable final long recruitId) {
+		RecruitDetailVO recruit = recruitService.getRecruitDetail(recruitId);
+		RecruitDetailResponseDTO recruitResponseDTO = RecruitDetailResponseDTO.from(recruit);
+		return ResponseEntity.ok(recruitResponseDTO);
 	}
 }
