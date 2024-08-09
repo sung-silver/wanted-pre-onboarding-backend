@@ -1,9 +1,12 @@
 package com.example.wanted.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.wanted.common.vo.RecruitIdVO;
+import com.example.wanted.common.vo.RecruitVO;
 import com.example.wanted.controller.dto.request.CreateRecruitRequestDTO;
 import com.example.wanted.controller.dto.request.UpdateRecruitRequestDTO;
 import com.example.wanted.domain.Company;
@@ -42,5 +45,12 @@ public class RecruitService {
 	public void deleteRecruit(final long recruitId) {
 		Recruit recruit = recruitRepository.findByIdOrThrow(recruitId);
 		recruitRepository.delete(recruit);
+	}
+
+	public List<RecruitVO> getRecruits() {
+		return recruitRepository.findAll()
+			.stream()
+			.map(RecruitVO::from)
+			.toList();
 	}
 }
