@@ -49,19 +49,19 @@ public class Recruit {
 		return new Recruit(position, recruitmentBonus, techStack, content, company);
 	}
 
-	public void updatePosition(final String position) {
-		this.position = position;
-	}
-
-	public void updateRecruitmentBonus(final int recruitmentBonus) {
-		this.recruitmentBonus = recruitmentBonus;
-	}
-
-	public void updateTechStack(final String techStack) {
-		this.techStack = techStack;
-	}
-
-	public void updateContent(final String content) {
-		this.content = content;
+	public void updateRecruitInfo(final String position, final Integer recruitmentBonus, final String techStack,
+		final String content) {
+		if (position != null) {
+			this.position = position;
+		}
+		if (recruitmentBonus != null) {
+			this.recruitmentBonus = recruitmentBonus;
+		}
+		if (techStack != null) {
+			this.techStack = techStack;
+		}
+		if (content != null) {
+			this.content = content;
+		}
 	}
 }
