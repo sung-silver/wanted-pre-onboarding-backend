@@ -37,4 +37,10 @@ public class RecruitService {
 		recruit.updateRecruitInfo(request.position(), request.recruitmentBonus(), request.techStack(),
 			request.content());
 	}
+
+	@Transactional
+	public void deleteRecruit(final long recruitId) {
+		Recruit recruit = recruitRepository.findByIdOrThrow(recruitId);
+		recruitRepository.delete(recruit);
+	}
 }
