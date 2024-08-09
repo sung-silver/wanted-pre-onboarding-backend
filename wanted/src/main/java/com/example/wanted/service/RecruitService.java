@@ -53,4 +53,11 @@ public class RecruitService {
 			.map(RecruitVO::from)
 			.toList();
 	}
+
+	public List<RecruitVO> searchRecruitsByKeyword(final String keyword) {
+		return recruitRepository.findRecruitsByKeyword(keyword)
+			.stream()
+			.map(RecruitVO::from)
+			.toList();
+	}
 }
