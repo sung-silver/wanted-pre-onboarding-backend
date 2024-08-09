@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -23,9 +24,11 @@ import com.example.wanted.service.RecruitService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequiredArgsConstructor
+@Slf4j
 @RequestMapping("/api/recruits")
 public class RecruitController {
 	private final RecruitService recruitService;
@@ -58,6 +61,16 @@ public class RecruitController {
 	@GetMapping
 	public ResponseEntity<List<RecruitResponseDTO>> getRecruits() {
 		List<RecruitVO> recruits = recruitService.getRecruits();
+		List<RecruitResponseDTO> recruitResponseDTOs = recruits.stream()
+			.map(RecruitResponseDTO::from)
+			.toList();
+		return ResponseEntity.ok(recruitResponseDTOs);
+	}
+
+	@GetMapping("/search")
+	public ResponseEntity<List<RecruitResponseDTO>> searchRecruitsByKeyword(@RequestParam final String keyword) {
+		log.info("keyword: {}", keyword);
+		List<RecruitVO> recruits = recruitService.searchRecruitsByKeyword(keyword);
 		List<RecruitResponseDTO> recruitResponseDTOs = recruits.stream()
 			.map(RecruitResponseDTO::from)
 			.toList();
