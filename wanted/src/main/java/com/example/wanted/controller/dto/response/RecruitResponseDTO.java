@@ -11,15 +11,15 @@ public record RecruitResponseDTO(
 	Integer recruitmentBonus,
 	String techStack
 ) {
-	public static RecruitResponseDTO from(RecruitVO recruit) {
+	public static RecruitResponseDTO from(RecruitVO recruitVO) {
 		return new RecruitResponseDTO(
-			recruit.recruitId(),
-			recruit.companyName(),
-			recruit.nation(),
-			recruit.location(),
-			recruit.position(),
-			recruit.recruitmentBonus(),
-			recruit.techStack()
+			recruitVO.recruitId(),
+			recruitVO.companyName(),
+			recruitVO.nation(),
+			recruitVO.location(),
+			recruitVO.position(),
+			recruitVO.recruitmentBonus(),
+			recruitVO.techStack()
 		);
 	}
 }
