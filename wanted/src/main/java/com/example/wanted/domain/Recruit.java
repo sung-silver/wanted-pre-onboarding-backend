@@ -47,4 +47,20 @@ public class Recruit {
 	public static Recruit createRecruit(String position, int recruitmentBonus, String techStack, String content, Company company) {
 		return new Recruit(position, recruitmentBonus, techStack, content, company);
 	}
+
+	public void updatePosition(String position) {
+		this.position = position;
+	}
+
+	public void updateRecruitmentBonus(int recruitmentBonus) {
+		this.recruitmentBonus = recruitmentBonus;
+	}
+
+	public void updateTechStack(String techStack) {
+		this.techStack = techStack;
+	}
+
+	public void updateContent(String content) {
+		this.content = content;
+	}
 }
