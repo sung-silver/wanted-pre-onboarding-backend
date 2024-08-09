@@ -1,6 +1,6 @@
 package com.example.wanted.repository;
 
-import static com.example.wanted.common.exception.exceptionType.RecruitException.*;
+import static com.example.wanted.common.exception.exceptionType.RecruitExceptionType.*;
 
 import java.util.List;
 
