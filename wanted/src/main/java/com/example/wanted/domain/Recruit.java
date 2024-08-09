@@ -35,4 +35,16 @@ public class Recruit {
 	@ManyToOne
 	@JoinColumn(name="company_id")
 	private Company company;
+
+	private Recruit(String position, int recruitmentBonus, String techStack, String content, Company company){
+		this.position = position;
+		this.recruitmentBonus = recruitmentBonus;
+		this.techStack = techStack;
+		this.content = content;
+		this.company = company;
+	}
+
+	public static Recruit createRecruit(String position, int recruitmentBonus, String techStack, String content, Company company) {
+		return new Recruit(position, recruitmentBonus, techStack, content, company);
+	}
 }
