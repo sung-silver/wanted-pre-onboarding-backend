@@ -33,10 +33,10 @@ public class Recruit {
 
 	@NotNull
 	@ManyToOne
-	@JoinColumn(name="company_id")
+	@JoinColumn(name = "company_id")
 	private Company company;
 
-	private Recruit(String position, int recruitmentBonus, String techStack, String content, Company company){
+	private Recruit(String position, int recruitmentBonus, String techStack, String content, Company company) {
 		this.position = position;
 		this.recruitmentBonus = recruitmentBonus;
 		this.techStack = techStack;
@@ -44,23 +44,24 @@ public class Recruit {
 		this.company = company;
 	}
 
-	public static Recruit createRecruit(String position, int recruitmentBonus, String techStack, String content, Company company) {
+	public static Recruit createRecruit(final String position, final int recruitmentBonus, final String techStack,
+		final String content, final Company company) {
 		return new Recruit(position, recruitmentBonus, techStack, content, company);
 	}
 
-	public void updatePosition(String position) {
+	public void updatePosition(final String position) {
 		this.position = position;
 	}
 
-	public void updateRecruitmentBonus(int recruitmentBonus) {
+	public void updateRecruitmentBonus(final int recruitmentBonus) {
 		this.recruitmentBonus = recruitmentBonus;
 	}
 
-	public void updateTechStack(String techStack) {
+	public void updateTechStack(final String techStack) {
 		this.techStack = techStack;
 	}
 
-	public void updateContent(String content) {
+	public void updateContent(final String content) {
 		this.content = content;
 	}
 }

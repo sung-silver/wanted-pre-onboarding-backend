@@ -8,7 +8,7 @@ import com.example.wanted.common.exception.ClientException;
 import com.example.wanted.domain.Company;
 
 public interface CompanyRepository extends JpaRepository<Company, Long> {
-	default Company findByIdOrThrow(Long companyId) {
+	default Company findByIdOrThrow(final Long companyId) {
 		return findById(companyId).orElseThrow(() -> new ClientException(NOT_FOUND_COMPANY));
 	}
 }
