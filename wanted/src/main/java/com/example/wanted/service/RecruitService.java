@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.wanted.common.vo.RecruitIdVO;
 import com.example.wanted.controller.dto.request.CreateRecruitRequestDTO;
+import com.example.wanted.controller.dto.request.UpdateRecruitRequestDTO;
 import com.example.wanted.domain.Company;
 import com.example.wanted.domain.Recruit;
 import com.example.wanted.repository.CompanyRepository;
@@ -28,5 +29,12 @@ public class RecruitService {
 		recruitRepository.save(recruit);
 
 		return RecruitIdVO.of(recruit.getId());
+	}
+
+	@Transactional
+	public void updateRecruit(final long recruitId, final UpdateRecruitRequestDTO request) {
+		Recruit recruit = recruitRepository.findByIdOrThrow(recruitId);
+		recruit.updateRecruitInfo(request.position(), request.recruitmentBonus(), request.techStack(),
+			request.content());
 	}
 }
