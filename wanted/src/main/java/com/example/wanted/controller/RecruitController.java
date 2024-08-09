@@ -2,7 +2,6 @@ package com.example.wanted.controller;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -61,7 +60,7 @@ public class RecruitController {
 		List<RecruitVO> recruits = recruitService.getRecruits();
 		List<RecruitResponseDTO> recruitResponseDTOs = recruits.stream()
 			.map(RecruitResponseDTO::from)
-			.collect(Collectors.toList());
+			.toList();
 		return ResponseEntity.ok(recruitResponseDTOs);
 	}
 }
