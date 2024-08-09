@@ -24,11 +24,9 @@ import com.example.wanted.service.RecruitService;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequiredArgsConstructor
-@Slf4j
 @RequestMapping("/api/recruits")
 public class RecruitController {
 	private final RecruitService recruitService;
@@ -69,8 +67,12 @@ public class RecruitController {
 
 	@GetMapping("/search")
 	public ResponseEntity<List<RecruitResponseDTO>> searchRecruitsByKeyword(@RequestParam final String keyword) {
-		log.info("keyword: {}", keyword);
-		List<RecruitVO> recruits = recruitService.searchRecruitsByKeyword(keyword);
+		List<RecruitVO> recruits;
+		if (keyword.isBlank()) {
+			recruits = recruitService.getRecruits();
+		} else {
+			recruits = recruitService.searchRecruitsByKeyword(keyword);
+		}
 		List<RecruitResponseDTO> recruitResponseDTOs = recruits.stream()
 			.map(RecruitResponseDTO::from)
 			.toList();
