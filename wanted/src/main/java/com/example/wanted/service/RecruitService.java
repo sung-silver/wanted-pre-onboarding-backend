@@ -20,7 +20,7 @@ public class RecruitService {
 	private final CompanyRepository companyRepository;
 
 	@Transactional
-	public RecruitIdVO createRecruit(CreateRecruitRequestDTO request) {
+	public RecruitIdVO createRecruit(final CreateRecruitRequestDTO request) {
 		Company company = companyRepository.findByIdOrThrow(request.companyId());
 		Recruit recruit = Recruit.createRecruit(request.position(), request.recruitmentBonus(), request.techStack(),
 			request.content(), company);

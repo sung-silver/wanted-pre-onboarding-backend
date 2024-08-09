@@ -23,7 +23,7 @@ public class RecruitController {
 	private final RecruitService recruitService;
 
 	@PostMapping
-	public ResponseEntity<Void> createRecruit(@RequestBody @Valid CreateRecruitRequestDTO dto) {
+	public ResponseEntity<Void> createRecruit(@RequestBody @Valid final CreateRecruitRequestDTO dto) {
 		RecruitIdVO recruitIdVO = recruitService.createRecruit(dto);
 		URI location = ServletUriComponentsBuilder
 			.fromCurrentRequest()
