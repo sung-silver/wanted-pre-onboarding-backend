@@ -1,9 +1,12 @@
 package com.example.wanted.domain;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.validation.constraints.NotNull;
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -25,6 +28,9 @@ public class Company {
 
 	@NotNull
 	private String location;
+
+	@OneToMany(mappedBy = "company")
+	List<Recruit> recruitList;
 
 	private Company(String name, String nation, String location){
 		this.name = name;
