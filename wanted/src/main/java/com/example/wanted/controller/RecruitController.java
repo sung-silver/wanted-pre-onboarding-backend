@@ -3,6 +3,7 @@ package com.example.wanted.controller;
 import java.net.URI;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,5 +43,11 @@ public class RecruitController {
 		@RequestBody @Valid final UpdateRecruitRequestDTO dto) {
 		recruitService.updateRecruit(recruitId, dto);
 		return ResponseEntity.ok().build();
+	}
+
+	@DeleteMapping("/{recruitId}")
+	public ResponseEntity<Void> deleteRecruit(@PathVariable final long recruitId) {
+		recruitService.deleteRecruit(recruitId);
+		return ResponseEntity.noContent().build();
 	}
 }
