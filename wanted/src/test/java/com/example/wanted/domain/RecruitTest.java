@@ -51,4 +51,18 @@ class RecruitTest {
 		// then
 		assertEquals(recruit.getPosition(), updatedPosition);
 	}
+
+	@Test
+	@DisplayName("Recruit의 recruitmentBonus를 수정할 수 있다")
+	void updateRecruitmentBonusTest() {
+		// given
+		Recruit recruit = RecruitFixture.createRecruit();
+		Integer updatedRecruitmentBonus = 2000000;
+
+		// when
+		recruit.updateRecruitInfo(null, updatedRecruitmentBonus, null, null);
+
+		// then
+		assertEquals(recruit.getRecruitmentBonus(), updatedRecruitmentBonus);
+	}
 }
