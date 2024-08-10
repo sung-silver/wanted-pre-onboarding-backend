@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.example.wanted.Fixture.CompanyFixture;
+import com.example.wanted.Fixture.RecruitFixture;
 
 @ActiveProfiles("test")
 class RecruitTest {
@@ -37,4 +38,17 @@ class RecruitTest {
 		assertEquals(recruit.getCompany(), company);
 	}
 
+	@Test
+	@DisplayName("Recruit의 position을 수정할 수 있다")
+	void updatePositionTest() {
+		// given
+		Recruit recruit = RecruitFixture.createRecruit();
+		String updatedPosition = "updatedPosition";
+
+		// when
+		recruit.updateRecruitInfo(updatedPosition, null, null, null);
+
+		// then
+		assertEquals(recruit.getPosition(), updatedPosition);
+	}
 }
