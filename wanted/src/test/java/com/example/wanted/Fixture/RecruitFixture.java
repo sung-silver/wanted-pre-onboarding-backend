@@ -1,7 +1,6 @@
 package com.example.wanted.Fixture;
 
 import com.example.wanted.domain.Company;
-import com.example.wanted.domain.Recruit;
 
 public abstract class RecruitFixture {
 	public static final String POSITION = "recruitPosition";
@@ -11,7 +10,4 @@ public abstract class RecruitFixture {
 	public static final Company COMPANY = Company.createCompany(CompanyFixture.NAME, CompanyFixture.NATION,
 		CompanyFixture.LOCATION);
 
-	public static Recruit createRecruit() {
-		return Recruit.createRecruit(POSITION, RECRUITMENT_BONUS, TECH_STACK, CONTENT, COMPANY);
-	}
 }
