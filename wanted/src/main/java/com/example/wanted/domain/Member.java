@@ -25,4 +25,14 @@ public class Member {
 
 	@NotNull
 	private String password;
+
+	private Member(String email, String name, String password) {
+		this.email = email;
+		this.name = name;
+		this.password = password;
+	}
+
+	public static Member createMember(String email, String name, String password) {
+		return new Member(email, name, password);
+	}
 }
