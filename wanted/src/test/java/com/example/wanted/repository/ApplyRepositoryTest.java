@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.example.wanted.Fixture.CompanyFixture;
@@ -54,6 +55,30 @@ class ApplyRepositoryTest {
 		// then
 		assertEquals(createdApply.getMember(), member);
 		assertEquals(createdApply.getRecruit(), recruit);
+	}
+
+	@Test
+	@DisplayName("이미 지원한 회원이 같은 채용공고에 대해 지원할 수 없다")
+	void saveApplyWithAlreadyAppliedMemberTest() {
+		// given
+		Member member = Member.createMember(MemberFixture.MEMBER_EMAIL, MemberFixture.MEMBER_NAME,
+			MemberFixture.MEMBER_PASSWORD);
+		memberRepository.save(member);
+
+		Company company = Company.createCompany(CompanyFixture.NAME, CompanyFixture.NATION, CompanyFixture.LOCATION);
+		companyRepository.save(company);
+
+		Recruit recruit = Recruit.createRecruit(RecruitFixture.POSITION, RecruitFixture.RECRUITMENT_BONUS,
+			RecruitFixture.TECH_STACK, RecruitFixture.CONTENT, company);
+		recruitRepository.save(recruit);
+
+		Apply apply = Apply.createApply(member, recruit);
+		applyRepository.save(apply);
+
+		Apply alreadyApply = Apply.createApply(member, recruit);
+
+		// when, then
+		assertThrows(DataIntegrityViolationException.class, () -> applyRepository.save(alreadyApply));
 	}
 
 }
