@@ -11,13 +11,17 @@ import com.example.wanted.Fixture.RecruitFixture;
 
 @ActiveProfiles("test")
 class ApplyTest {
+	private Member member;
+	private Recruit recruit;
 
 	@Test
 	@DisplayName("Apply를 생성할 수 있다")
 	void createApplyTest() {
 		// given
-		Member member = MemberFixture.createMember();
-		Recruit recruit = RecruitFixture.createRecruit();
+		member = Member.createMember(MemberFixture.MEMBER_EMAIL, MemberFixture.MEMBER_NAME,
+			MemberFixture.MEMBER_PASSWORD);
+		recruit = Recruit.createRecruit(RecruitFixture.POSITION, RecruitFixture.RECRUITMENT_BONUS,
+			RecruitFixture.TECH_STACK, RecruitFixture.CONTENT, RecruitFixture.COMPANY);
 
 		// when
 		Apply apply = Apply.createApply(member, recruit);
