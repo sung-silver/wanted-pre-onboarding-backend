@@ -65,4 +65,18 @@ class RecruitTest {
 		// then
 		assertEquals(recruit.getRecruitmentBonus(), updatedRecruitmentBonus);
 	}
+
+	@Test
+	@DisplayName("Recruit의 techStack을 수정할 수 있다")
+	void updateTechStackTest() {
+		// given
+		Recruit recruit = RecruitFixture.createRecruit();
+		String updatedTechStack = "updatedTechStack";
+
+		// when
+		recruit.updateRecruitInfo(null, null, updatedTechStack, null);
+
+		// then
+		assertEquals(recruit.getTechStack(), updatedTechStack);
+	}
 }
