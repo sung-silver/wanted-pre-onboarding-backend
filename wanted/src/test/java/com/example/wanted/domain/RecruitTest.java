@@ -25,7 +25,7 @@ class RecruitTest {
 		recruitmentBonus = 1000000;
 		techStack = "techStack";
 		content = "content";
-		company = CompanyFixture.createCompany();
+		company = Company.createCompany(CompanyFixture.NAME, CompanyFixture.NATION, CompanyFixture.LOCATION);
 
 		// when
 		Recruit recruit = Recruit.createRecruit(position, recruitmentBonus, techStack, content, company);
@@ -42,7 +42,8 @@ class RecruitTest {
 	@DisplayName("Recruit의 position을 수정할 수 있다")
 	void updatePositionTest() {
 		// given
-		Recruit recruit = RecruitFixture.createRecruit();
+		Recruit recruit = Recruit.createRecruit(RecruitFixture.POSITION, RecruitFixture.RECRUITMENT_BONUS,
+			RecruitFixture.TECH_STACK, RecruitFixture.CONTENT, RecruitFixture.COMPANY);
 		String updatedPosition = "updatedPosition";
 
 		// when
@@ -56,7 +57,8 @@ class RecruitTest {
 	@DisplayName("Recruit의 recruitmentBonus를 수정할 수 있다")
 	void updateRecruitmentBonusTest() {
 		// given
-		Recruit recruit = RecruitFixture.createRecruit();
+		Recruit recruit = Recruit.createRecruit(RecruitFixture.POSITION, RecruitFixture.RECRUITMENT_BONUS,
+			RecruitFixture.TECH_STACK, RecruitFixture.CONTENT, RecruitFixture.COMPANY);
 		Integer updatedRecruitmentBonus = 2000000;
 
 		// when
@@ -70,7 +72,8 @@ class RecruitTest {
 	@DisplayName("Recruit의 techStack을 수정할 수 있다")
 	void updateTechStackTest() {
 		// given
-		Recruit recruit = RecruitFixture.createRecruit();
+		Recruit recruit = Recruit.createRecruit(RecruitFixture.POSITION, RecruitFixture.RECRUITMENT_BONUS,
+			RecruitFixture.TECH_STACK, RecruitFixture.CONTENT, RecruitFixture.COMPANY);
 		String updatedTechStack = "updatedTechStack";
 
 		// when
@@ -84,7 +87,8 @@ class RecruitTest {
 	@DisplayName("Recruit의 content를 수정할 수 있다")
 	void updateContentTest() {
 		// given
-		Recruit recruit = RecruitFixture.createRecruit();
+		Recruit recruit = Recruit.createRecruit(RecruitFixture.POSITION, RecruitFixture.RECRUITMENT_BONUS,
+			RecruitFixture.TECH_STACK, RecruitFixture.CONTENT, RecruitFixture.COMPANY);
 		String updatedContent = "updatedContent";
 
 		// when
