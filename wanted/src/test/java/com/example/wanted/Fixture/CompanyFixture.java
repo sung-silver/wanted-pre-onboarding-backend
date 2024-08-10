@@ -2,7 +2,7 @@ package com.example.wanted.Fixture;
 
 import com.example.wanted.domain.Company;
 
-public class CompanyFixture {
+public abstract class CompanyFixture {
 	public static final String NAME = "companyName";
 	public static final String NATION = "companyNation";
 	public static final String LOCATION = "companyLocation";
