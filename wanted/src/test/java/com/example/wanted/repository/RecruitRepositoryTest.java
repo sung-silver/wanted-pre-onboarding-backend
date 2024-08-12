@@ -1,5 +1,6 @@
 package com.example.wanted.repository;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
@@ -10,6 +11,8 @@ import org.springframework.test.context.ActiveProfiles;
 
 import com.example.wanted.Fixture.CompanyFixture;
 import com.example.wanted.Fixture.RecruitFixture;
+import com.example.wanted.common.exception.ClientException;
+import com.example.wanted.common.exception.exceptionType.RecruitExceptionType;
 import com.example.wanted.domain.Company;
 import com.example.wanted.domain.Recruit;
 
@@ -37,6 +40,17 @@ class RecruitRepositoryTest {
 
 		// then
 		assertEquals(foundRecruit, recruit);
+	}
+
+	@Test
+	@DisplayName("없는 id로 Recruit를 조회할 경우 예외가 발생한다")
+	void findByIdOrThrowWithNotExistId() {
+		// given
+		Long notExistId = 0L;
+
+		// when, then
+		assertThat(assertThrows(ClientException.class, () -> recruitRepository.findByIdOrThrow(notExistId))
+			.getExceptionType()).isEqualTo(RecruitExceptionType.NOT_FOUND_RECRUIT);
 	}
 
 }
