@@ -30,4 +30,14 @@ class CompanyRepositoryTest {
 		// then
 		assertEquals(foundCompany, company);
 	}
+
+	@Test
+	@DisplayName("없는 id로 Company를 조회할 경우 예외가 발생한다")
+	void findByIdOrThrowWithNotExistId() {
+		// given
+		Long notExistId = 0L;
+
+		// when, then
+		assertThrows(Exception.class, () -> companyRepository.findByIdOrThrow(notExistId));
+	}
 }
