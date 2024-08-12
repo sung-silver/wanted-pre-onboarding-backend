@@ -1,5 +1,6 @@
 package com.example.wanted.repository;
 
+import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.DisplayName;
@@ -9,6 +10,8 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.example.wanted.Fixture.CompanyFixture;
+import com.example.wanted.common.exception.ClientException;
+import com.example.wanted.common.exception.exceptionType.CompanyExceptionType;
 import com.example.wanted.domain.Company;
 
 @ActiveProfiles("test")
@@ -38,6 +41,7 @@ class CompanyRepositoryTest {
 		Long notExistId = 0L;
 
 		// when, then
-		assertThrows(Exception.class, () -> companyRepository.findByIdOrThrow(notExistId));
+		assertThat(assertThrows(ClientException.class, () -> companyRepository.findByIdOrThrow(notExistId))
+			.getExceptionType()).isEqualTo(CompanyExceptionType.NOT_FOUND_COMPANY);
 	}
 }
