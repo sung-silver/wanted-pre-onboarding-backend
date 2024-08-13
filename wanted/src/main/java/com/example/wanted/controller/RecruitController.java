@@ -69,12 +69,9 @@ public class RecruitController {
 
 	@GetMapping("/search")
 	public ResponseEntity<List<RecruitResponseDTO>> searchRecruitsByKeyword(@RequestParam final String keyword) {
+		String searchKeyword = keyword.trim();
 		List<RecruitVO> recruits;
-		if (keyword.isBlank()) {
-			recruits = recruitService.getRecruits();
-		} else {
-			recruits = recruitService.searchRecruitsByKeyword(keyword);
-		}
+		recruits = recruitService.searchRecruitsByKeyword(searchKeyword);
 		List<RecruitResponseDTO> recruitResponseDTOs = recruits.stream()
 			.map(RecruitResponseDTO::from)
 			.toList();
