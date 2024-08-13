@@ -3,6 +3,8 @@ package com.example.wanted.repository;
 import static org.assertj.core.api.Assertions.*;
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.List;
+
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +53,34 @@ class RecruitRepositoryTest {
 		// when, then
 		assertThat(assertThrows(ClientException.class, () -> recruitRepository.findByIdOrThrow(notExistId))
 			.getExceptionType()).isEqualTo(RecruitExceptionType.NOT_FOUND_RECRUIT);
+	}
+
+	@Test
+	@DisplayName("회사 이름으로 Recruit를 조회할 수 있다")
+	void findByCompanyNameTest() {
+		// given
+		Company company1 = Company.createCompany(CompanyFixture.NAME, CompanyFixture.NATION, CompanyFixture.LOCATION);
+		companyRepository.save(company1);
+		Company company2 = Company.createCompany("원티드", "한국", "서울");
+		companyRepository.save(company2);
+
+		Recruit recruit1 = Recruit.createRecruit(RecruitFixture.POSITION, RecruitFixture.RECRUITMENT_BONUS,
+			RecruitFixture.TECH_STACK, RecruitFixture.CONTENT, company1);
+		recruitRepository.save(recruit1);
+		Recruit recruit2 = Recruit.createRecruit("백엔드", 10000, "Spring Boot", "함께 성장할 분들을 기다립니다", company2);
+		recruitRepository.save(recruit2);
+
+		// when
+		List<Recruit> foundRecruits = recruitRepository.findRecruitsByKeyword(company2.getName());
+
+		// then
+		assertEquals(1, foundRecruits.size());
+		Recruit foundRecruit = foundRecruits.get(0);
+		assertEquals(recruit2.getPosition(), foundRecruit.getPosition());
+		assertEquals(recruit2.getRecruitmentBonus(), foundRecruit.getRecruitmentBonus());
+		assertEquals(recruit2.getTechStack(), foundRecruit.getTechStack());
+		assertEquals(recruit2.getContent(), foundRecruit.getContent());
+		assertEquals(company2.getName(), foundRecruit.getCompany().getName());
 	}
 
 }
