@@ -138,4 +138,27 @@ class RecruitRepositoryTest {
 		assertEquals(recruit2.getContent(), foundRecruit.getContent());
 		assertEquals(company2.getName(), foundRecruit.getCompany().getName());
 	}
+
+	@Test
+	@DisplayName("빈 문자열로 Recruit을 조회하면 전체 리스트가 반환된다")
+	void findByBlankKeywordTest() {
+		// given
+		final String BLANK_KEYWORD = "";
+		Company company1 = Company.createCompany(CompanyFixture.NAME, CompanyFixture.NATION, CompanyFixture.LOCATION);
+		companyRepository.save(company1);
+		Company company2 = Company.createCompany("원티드", "한국", "서울");
+		companyRepository.save(company2);
+
+		Recruit recruit1 = Recruit.createRecruit(RecruitFixture.POSITION, RecruitFixture.RECRUITMENT_BONUS,
+			RecruitFixture.TECH_STACK, RecruitFixture.CONTENT, company1);
+		recruitRepository.save(recruit1);
+		Recruit recruit2 = Recruit.createRecruit("백엔드", 10000, "Spring Boot", "함께 성장할 분들을 기다립니다", company2);
+		recruitRepository.save(recruit2);
+
+		// when
+		List<Recruit> foundRecruits = recruitRepository.findRecruitsByKeyword(BLANK_KEYWORD);
+
+		// then
+		assertEquals(2, foundRecruits.size());
+	}
 }
