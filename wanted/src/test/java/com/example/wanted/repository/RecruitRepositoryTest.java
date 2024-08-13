@@ -111,4 +111,31 @@ class RecruitRepositoryTest {
 		assertEquals(company2.getName(), foundRecruit.getCompany().getName());
 	}
 
+	@Test
+	@DisplayName("기술 스택으로 Recruit를 조회할 수 있다")
+	void findByTechStackTest() {
+		// given
+		Company company1 = Company.createCompany(CompanyFixture.NAME, CompanyFixture.NATION, CompanyFixture.LOCATION);
+		companyRepository.save(company1);
+		Company company2 = Company.createCompany("원티드", "한국", "서울");
+		companyRepository.save(company2);
+
+		Recruit recruit1 = Recruit.createRecruit(RecruitFixture.POSITION, RecruitFixture.RECRUITMENT_BONUS,
+			RecruitFixture.TECH_STACK, RecruitFixture.CONTENT, company1);
+		recruitRepository.save(recruit1);
+		Recruit recruit2 = Recruit.createRecruit("백엔드", 10000, "Spring Boot", "함께 성장할 분들을 기다립니다", company2);
+		recruitRepository.save(recruit2);
+
+		// when
+		List<Recruit> foundRecruits = recruitRepository.findRecruitsByKeyword(recruit2.getTechStack());
+
+		// then
+		assertEquals(1, foundRecruits.size());
+		Recruit foundRecruit = foundRecruits.get(0);
+		assertEquals(recruit2.getPosition(), foundRecruit.getPosition());
+		assertEquals(recruit2.getRecruitmentBonus(), foundRecruit.getRecruitmentBonus());
+		assertEquals(recruit2.getTechStack(), foundRecruit.getTechStack());
+		assertEquals(recruit2.getContent(), foundRecruit.getContent());
+		assertEquals(company2.getName(), foundRecruit.getCompany().getName());
+	}
 }
